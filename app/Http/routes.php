@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
+
+     if(!empty($_POST['title'])){
+        $title = ($_POST['title']);
+        DB::insert('INSERT INTO calc (name) values ('.$title.')');
+        return view('welcome');
+    }
+
     return view('welcome');
+});
+
+Route::get('/about', function () {
+    return view('about');
 });
