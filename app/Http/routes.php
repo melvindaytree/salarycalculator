@@ -56,3 +56,12 @@ Route::get('/navigation', function () {
 Route::get('/results', function () {
     return view('results');
 });
+
+Route::get('/delete/{id}', function ($id) {
+    DB::delete('DELETE FROM calc WHERE id IN ('.$id.');');
+    
+    return Redirect::to('results');
+   // return view('results');
+});
+
+

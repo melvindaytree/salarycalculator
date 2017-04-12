@@ -32,7 +32,7 @@
                     <thead>
                     <tr>
 
-                        <th>Name</th>
+                        <th>Title</th>
                         <th>Salary</th>
                         <th>State</th>
                         <th>FED Taxes</th>
@@ -44,28 +44,35 @@
                         <th>Hours</th>
                         <th>On Call</th>
                         <th>Night</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
 
 <?php $results = DB::select('SELECT * FROM calc'); 
             foreach( $results as $row) {
+
+                $fedTaxes = $row->salary * .28;
+                $stateTaxes = $row->salary * .05;
+                $afterTaxes = $row->salary - ($row->salary * .28) - ($row->salary * .05);
+                $retirement = $row->retirement * $row->salary / 100;
+
                 echo '
                         <tr>
                         <th>'.$row->title.'</th>
                         <th>'.$row->salary.'</th>
                         <th>'.$row->state.'</th>
-                        <th>'.$row->salary * .28 .'</th>
-                        <th>'.$row->salary * .05 .'</th>
-                        <th>'.$row->salary .'</th>
+                        <th>'.$fedTaxes.'</th>
+                        <th>'.$stateTaxes.'</th>
+                        <th>'.$afterTaxes.'</th>
                         <th>'.$row->insurance.'</th>
-                        <th>'.$row->retirement * $row->salary / 100 .'</th>
+                        <th>'.$retirement.'</th>
                         <th>'.$row->distance.'</th>
                         <th>'.$row->hours.'</th>
                         <th>'.$row->oncall.'</th>
                         <th>'.$row->night.'</th>
+                        <th class="text-center"><a href="/delete/'.$row->id.'">x</a></th>
                         </tr>';  
-
                  }
            ?>
 
