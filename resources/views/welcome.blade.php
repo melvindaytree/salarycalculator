@@ -4,33 +4,37 @@
         <title>Salary Calculator</title>
 
         <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> 
 
     </head>
     <body>
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="results">Results</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="container">
             <div class="content">
                 <div class="title">Salary Calculator</div>
             </div>
-            <form method="POST" action="/about">
-
+            <form method="GET" action="">
+            {{ csrf_field() }}
             <span class="col-md-12">Job Title: <input name="title" type="text"></span>
             <span class="col-md-12">Total Salary: <input name="salary" type="text"></span>
-            <span class="col-md-12">State of Job: <input list="states"></span>
-            <span class="col-md-12">Insurance Benefits: <input type="text"></span>
-            <span class="col-md-12">401k Contribution (%): <input type="text"></span>
-            <span class="col-md-12">Distance from Job: <input type="text"></span>
-            <span class="col-md-12">Total Hours: <input type="text"></span>
-            <span class="col-md-12">On call?: <input type="checkbox"></span>
-            <span class="col-md-12">Work Nights?: <input type="checkbox"></span>
+            <span class="col-md-12">State of Job: <input name="state" list="states"></span>
+            <span class="col-md-12">Insurance Benefits: <input name="insurance" type="text"></span>
+            <span class="col-md-12">401k Contribution (%): <input name="retirement" type="text"></span>
+            <span class="col-md-12">Distance from Job(m): <input name="distance" type="text"></span>
+            <span class="col-md-12">Total Hours: <input name="hours" type="text"></span>
+            <span class="col-md-12">On call?: <input name="oncall" type="checkbox"></span>
+            <span class="col-md-12">Work Nights?: <input name="night" type="checkbox"></span>
             <span class="col-md-12"><button type="submit">Calculate</button></span>
             </form>
 
-           <?php $results = DB::select('SELECT * FROM calc'); 
-            foreach( $results as $row) {
-                echo "<p>" . $row->name . "&nbsp;" . $row->id . "</p><hr>";
-                 }
-           ?>
         </div>
     </body>
 </html>

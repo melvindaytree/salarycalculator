@@ -13,15 +13,46 @@
 
 Route::get('/', function () {
 
-     if(!empty($_POST['title'])){
-        $title = ($_POST['title']);
-        DB::insert('INSERT INTO calc (name) values ('.$title.')');
+     if(!empty($_GET['title'])){
+
+        $title = ($_GET['title']);
+        $salary = ($_GET['salary']);
+        $state = ($_GET['state']);
+        $insurance = ($_GET['insurance']);
+        $retirement = ($_GET['retirement']);
+        $distance = ($_GET['distance']);
+        $hours = ($_GET['hours']);
+
+        if(empty($_GET['oncall'])) {
+            $oncall = "no";
+        } else {
+            $oncall = ($_GET['oncall']);
+        }
+
+        if(empty($_GET['night'])) {
+            $night = "no";
+        } else {
+            $night = ($_GET['night']);
+        }
+
+        DB::insert('INSERT INTO calc (title, salary, state, insurance, retirement, distance, hours, oncall, night)
+        values ("'.$title.'", '.$salary.', "'.$state.'", '.$insurance.', '.$retirement.', '.$distance.', '.$hours.', "'.$oncall.'", "'.$night.'")');
         return view('welcome');
-    }
+    } 
 
     return view('welcome');
 });
 
+Route::post('form', 'ArticlesController@store');
+
 Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/navigation', function () {
+    return view('navigation');
+});
+
+Route::get('/results', function () {
+    return view('results');
 });
