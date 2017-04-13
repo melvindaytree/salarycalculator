@@ -28,6 +28,10 @@
                 font-size: 96px;
             }
 
+            .font {
+                font-family: 'Lato';
+            }
+
             input {
                 border: 0;
                 outline: 0;

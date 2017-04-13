@@ -37,7 +37,7 @@ Route::get('/', function () {
 
         DB::insert('INSERT INTO calc (title, salary, state, insurance, retirement, distance, hours, oncall, night)
         values ("'.$title.'", '.$salary.', "'.$state.'", '.$insurance.', '.$retirement.', '.$distance.', '.$hours.', "'.$oncall.'", "'.$night.'")');
-        return view('welcome');
+        return Redirect::to('/');
     } 
 
     return view('welcome');

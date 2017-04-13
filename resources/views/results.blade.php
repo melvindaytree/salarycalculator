@@ -27,7 +27,7 @@
                 </ul>
             </div>
         </div>
-        <h1 class="text-center">Compare Results</h1>
+        <h1 class="text-center font">Compare Results</h1>
     <table id="results" class="table table-bordered table-striped tablesorter">
                     <thead>
                     <tr>
