@@ -55,7 +55,7 @@
                 $fedTaxes = $row->salary * .28;
                 $stateTaxes = $row->salary * .05;
                 $afterTaxes = $row->salary - ($row->salary * .28) - ($row->salary * .05);
-                $retirement = $row->retirement * $row->salary / 100;
+                $retirement = $row->retirement / 100 * $row->salary ;
 
                 echo '
                         <tr>

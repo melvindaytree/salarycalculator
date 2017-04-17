@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*
 Route::get('/', function () {
 
      if(!empty($_GET['title'])){
@@ -42,8 +42,67 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+*/
 
-Route::post('form', 'ArticlesController@store');
+Route::get('/', function() 
+{
+    return View::make('welcome');
+});
+
+Route::post('/', function () {
+
+     //create the validation
+     $rules = array (
+        'title' => 'required',
+        'salary' => 'required',
+        'state' => 'required',
+        'insurance' => 'required',
+        'retirement' => 'required',
+        'distance' => 'required',
+        'hours' => 'required'
+     );
+
+     // do the validation ----------------------------------
+    // validate against the inputs from our form
+    $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // our duck has passed all tests!
+        // let him enter the database
+
+        // create the data for our duck
+        $job = new Job;
+        $job->title     = Input::get('title');
+        $job->salary    = Input::get('salary');
+        $job->state     = Input::get('state');
+        $job->insurance     = Input::get('insurance');
+        $job->retirement     = Input::get('retirment');
+        $job->distance     = Input::get('distance');
+        $job->hours     = Input::get('hours');
+
+        // save our duck
+        $job->save();
+
+        // redirect ----------------------------------------
+        // redirect our user back to the form so they can do it all over again
+        return Redirect::to('/');
+
+    }
+
+});
+
 
 Route::get('/about', function () {
     return view('about');
