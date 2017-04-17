@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
 
-<?php $results = DB::select('SELECT * FROM calc'); 
+<?php $results = DB::select('SELECT * FROM calcd'); 
             foreach( $results as $row) {
 
                 $fedTaxes = $row->salary * .28;

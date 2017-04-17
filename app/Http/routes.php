@@ -44,20 +44,45 @@ Route::get('/', function () {
 });
 */
 
+
 Route::get('/', function() 
 {
     return View::make('welcome');
 });
 
+use \App\Form;
+
 Route::post('/', function () {
 
+     $v = Form::validate(Input::all());
+
+        if ( $v->passes() ) {
+                Form::create(array(
+                        'title'=> Input::get('title'),
+                        'salary'=> Input::get('salary'),
+                        'state'     => Input::get('state'),
+                        'insurance'     => Input::get('insurance'),
+                        'retirement'     => Input::get('retirement'),
+                        'distance'     => Input::get('distance'),
+                        'hours'     => Input::get('hours'),
+                        'oncall'     => Input::get('oncall'),
+                        'night'     => Input::get('night')
+                ));
+
+                return Redirect::to('/');
+        } else {
+                return Redirect::to('/')->withErrors($v->messages());
+        }
+});
+
+/*
      //create the validation
      $rules = array (
-        'title' => 'required',
-        'salary' => 'required',
-        'state' => 'required',
-        'insurance' => 'required',
-        'retirement' => 'required',
+        'title' => 'required'|'string',
+        'salary' => 'required'|'digit',
+        'state' => 'required'|'string',
+        'insurance' => 'required'|'digit',
+        'retirement' => 'required'|'digit',
         'distance' => 'required',
         'hours' => 'required'
      );
@@ -79,10 +104,10 @@ Route::post('/', function () {
     } else {
         // validation successful ---------------------------
 
-        // our duck has passed all tests!
+        // our job has passed all tests!
         // let him enter the database
 
-        // create the data for our duck
+        // create the data for our job
         $job = new Job;
         $job->title     = Input::get('title');
         $job->salary    = Input::get('salary');
@@ -92,7 +117,7 @@ Route::post('/', function () {
         $job->distance     = Input::get('distance');
         $job->hours     = Input::get('hours');
 
-        // save our duck
+        // save our job
         $job->save();
 
         // redirect ----------------------------------------
@@ -102,6 +127,8 @@ Route::post('/', function () {
     }
 
 });
+
+*/
 
 
 Route::get('/about', function () {

@@ -21,7 +21,16 @@
             <div class="content">
                 <div class="title">Salary Calculator</div>
             </div>
-            <form method="POST" action="/" novalidate>
+			@if ( $errors->count() > 0 )
+			<p>The following errors have occurred:</p>
+
+			<ul>
+				@foreach( $errors->all() as $message )
+				<li>{{ $message }}</li>
+				@endforeach
+			</ul>
+			@endif
+            <form method="POST" action="/">
             {{ csrf_field() }}
             <span class="col-md-12">Job Title: <input name="title" type="text"></span>
             <span class="col-md-12">Total Salary: <input name="salary" type="text"></span>
