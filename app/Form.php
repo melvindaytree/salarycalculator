@@ -8,12 +8,13 @@ class Form extends Model {
 
         protected $table = 'calcd';
 
-        protected $fillable = ['title', 'salary', 'state', 'insurance', 'retirement', 'distance', 'hours', 'oncall', 'night'];
+        protected $fillable = ['user', 'title', 'salary', 'state', 'insurance', 'retirement', 'distance', 'hours', 'oncall', 'night'];
 
         public $timestamps = false;
 
         public static function validate($input) {
                 $rules = array(
+                    'user' => 'required|integer',
                     'title' => 'required|string|Alpha',
                     'salary' => 'required|integer',
                     'state' => 'required|string|Alpha',

@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,15 +10,6 @@
 
     </head>
     <body>
-        <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="results">Results</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="container">
             <div class="content">
                 <div class="title">Salary Calculator</div>
@@ -30,15 +23,17 @@
 				@endforeach
 			</ul>
 			@endif
+            
             <form method="POST" action="/">
             {{ csrf_field() }}
-            <span class="col-md-12">Job Title: <input name="title" type="text"></span>
-            <span class="col-md-12">Total Salary: <input name="salary" type="text"></span>
-            <span class="col-md-12">State of Job: <input name="state" list="states"></span>
-            <span class="col-md-12">Insurance Benefits: <input name="insurance" type="text"></span>
-            <span class="col-md-12">401k Contribution (%): <input name="retirement" type="text"></span>
-            <span class="col-md-12">Distance from Job(m): <input name="distance" type="text"></span>
-            <span class="col-md-12">Total Hours: <input name="hours" type="text"></span>
+            <span class="col-md-12 hidden"><input name="user" type="text" value="@if(Auth::check()){{Auth::user()->id}}@endif"></span>
+            <span class="col-md-12">Job Title: <input name="title" type="text" value="{{ old('title') }}"></span>
+            <span class="col-md-12">Total Salary: <input name="salary" type="text" value="{{ old('salary') }}"></span>
+            <span class="col-md-12">State of Job: <input name="state" list="states" value="{{ old('state') }}"></span>
+            <span class="col-md-12">Insurance Benefits: <input name="insurance" type="text" value="{{ old('insurance') }}"></span>
+            <span class="col-md-12">401k Contribution (%): <input name="retirement" type="text" value="{{ old('retirement') }}"></span>
+            <span class="col-md-12">Distance from Job(m): <input name="distance" type="text" value="{{ old('distance') }}"></span>
+            <span class="col-md-12">Total Hours: <input name="hours" type="text" value="{{ old('hours') }}"></span>
             <span class="col-md-12">On call?: <input name="oncall" type="checkbox"></span>
             <span class="col-md-12">Work Nights?: <input name="night" type="checkbox"></span>
             <span class="col-md-12"><button type="submit">Calculate</button></span>

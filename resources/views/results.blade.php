@@ -1,3 +1,5 @@
+
+@extends('layouts.app')
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -18,15 +20,7 @@
 </head>
 
 <body>
-    <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="results">Results</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
-        </div>
+
         <h1 class="text-center font">Compare Results</h1>
     <table id="results" class="table table-bordered table-striped tablesorter">
                     <thead>
@@ -49,13 +43,24 @@
                     </thead>
                     <tbody>
 
-<?php $results = DB::select('SELECT * FROM calcd'); 
+<?php 
+
+$id = Auth::user()->id;
+$results = DB::select('SELECT * FROM calcd where user = '.$id.''); 
             foreach( $results as $row) {
 
                 $fedTaxes = $row->salary * .28;
                 $stateTaxes = $row->salary * .05;
                 $afterTaxes = $row->salary - ($row->salary * .28) - ($row->salary * .05);
                 $retirement = $row->retirement / 100 * $row->salary ;
+                $oncall = $row->oncall;
+                $night = $row->night;
+                if ( $oncall != "on" ) {
+                    $oncall = "off";
+                }
+                if ( $night != "on" ) {
+                    $night = "off";
+                }
 
                 echo '
                         <tr>
@@ -69,8 +74,8 @@
                         <th>'.$retirement.'</th>
                         <th>'.$row->distance.'</th>
                         <th>'.$row->hours.'</th>
-                        <th>'.$row->oncall.'</th>
-                        <th>'.$row->night.'</th>
+                        <th>'.$oncall.'</th>
+                        <th>'.$night.'</th>
                         <th class="text-center"><a href="/delete/'.$row->id.'">x</a></th>
                         </tr>';  
                  }

@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,15 +8,6 @@
 
     </head>
     <body>
-    <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="results">Results</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="container">
             <div class="content">
                 <div class="title">All About the Project</div>
