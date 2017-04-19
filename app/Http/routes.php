@@ -59,7 +59,15 @@ Route::get('/navigation', function () {
 });
 
 Route::get('/results', function () {
-    return view('results');
+
+    if (Auth::check()) {
+        return view('results');
+    }
+
+    else {
+        return Redirect::to('login');
+    }
+    
 });
 
 Route::get('/delete/{id}', function ($id) {
