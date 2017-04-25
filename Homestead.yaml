@@ -21,6 +21,8 @@ sites:
 
 databases:
     - homestead
+    - calcd
+    - users
 
 # blackfire:
 #     - id: foo

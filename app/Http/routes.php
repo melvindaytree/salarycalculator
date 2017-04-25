@@ -81,4 +81,4 @@ Route::get('/delete/{id}', function ($id) {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
